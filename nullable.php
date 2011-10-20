@@ -11,16 +11,18 @@ class NullableBehavior extends ModelBehavior {
 	 * @param		model		The model object to be saved.
 	 * @return	void
 	 */
-	function beforeSave ( $model ) {
+	function beforeSave ($model) {
 		$schema = $model->schema();
 
-		foreach ( $schema as $field => $metadata ) {
-			if ( $metadata['null'] ) {
-				if ( isset ( $model->data[$model->name][$field] ) && $model->data[$model->name][$field] === '' ) {
+		foreach ($schema as $field => $metadata) {
+			if ($metadata['null']) {
+				if (isset($model->data[$model->name][$field]) && $model->data[$model->name][$field] === '') {
 					$model->data[$model->name][$field] = null;
 				}
 			}
 		}
+
+		return true;
 	}
 }
 
