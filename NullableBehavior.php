@@ -15,9 +15,9 @@ class NullableBehavior extends ModelBehavior {
 		$schema = $model->schema();
 
 		foreach ($schema as $field => $metadata) {
-			if ($metadata['null']) {
-				if (isset($model->data[$model->name][$field]) && $model->data[$model->name][$field] === '') {
-					$model->data[$model->name][$field] = null;
+			if(isset($model->data[$model->alias][$field]) && $metadata['null']) {
+		        if($model->data[$model->alias][$field] == '') {
+					$model->data[$model->alias][$field] = null;
 				}
 			}
 		}
